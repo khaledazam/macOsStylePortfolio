@@ -3,10 +3,11 @@ import { dockApps } from "#constants/index.js";
 import { Tooltip } from 'react-tooltip'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import useWindowStore from "#store/window.js";
 
 export const Docks = () => {
+    const {openWindow, closeWindow, windows} = useWindowStore()
     const dockRef = useRef(null);
-
     useGSAP(() => {
         const dock = dockRef.current;
         if (!dock) return;
@@ -16,7 +17,7 @@ export const Docks = () => {
         const animateIcons = (mouseX) => {
             icons.forEach((icon) => {
                 const { left, width } = icon.getBoundingClientRect();
-                const center = left + width / 2; // center الصحيح بالنسبة للviewport
+                const center = left + width / 2;
                 const distance = Math.abs(mouseX - center);
                 const intensity = Math.exp(-(distance ** 2) / 20000); // يمكن تعديل 20000 لتغيير التأثير
 
@@ -55,7 +56,18 @@ export const Docks = () => {
     }, []);
 
     const toggleApp = (app) => {
-        console.log("Open app:", app);
+        if (!app.canOpen) return;
+
+        const state = useWindowStore.getState();
+        const window = state.windows[app.id];
+
+        if (window.isOpen) {
+            closeWindow(app.id);
+        } else {
+            openWindow(app.id);
+        }
+
+        console.log(useWindowStore.getState().windows);
     };
 
     return (
@@ -71,7 +83,7 @@ export const Docks = () => {
                             data-tooltip-content={name}
                             data-tooltip-delay-show={150}
                             disabled={!canOpen}
-                            onClick={() => toggleApp(canOpen)}
+                            onClick={() => toggleApp({ id, name, icon, canOpen })}
                         >
                             <img
                                 src={`/images/${icon}`}
