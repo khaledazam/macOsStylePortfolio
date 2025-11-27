@@ -4,7 +4,8 @@ import Welcome from "#components/Welcome.jsx";
 import { Docks } from "#components/Docks.jsx";
 import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
-import { TerminalWindow } from "#windows/index.js";
+import {Safari, TerminalWindow} from "#windows/index.js";
+import Resume from "#windows/Resume.jsx";
 
 gsap.registerPlugin(Draggable);
 
@@ -14,7 +15,9 @@ const App = () => {
             <Navbar />
             <Welcome />
             <Docks />
-            <TerminalWindow /> {/* فقط هنا */}
+            <TerminalWindow />
+            <Safari />
+            <Resume />
         </main>
     );
 };
