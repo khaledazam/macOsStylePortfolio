@@ -19,6 +19,7 @@ const useWindowStore = create(
         closeWindow: (windowKey) =>
             set((state) => {
                 const win = state.windows[windowKey];
+                if (!win) return; // لو مش موجود، متعملش حاجة
                 win.isOpen = false;
                 win.zIndex = INITIAL_Z_INDEX;
                 win.data = null;

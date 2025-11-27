@@ -163,38 +163,67 @@ body {
   }
 
   #terminal {
-    @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-[500px] max-w-full absolute top-10 left-1/12 bg-[#1E1E1E] text-white rounded-xl shadow-2xl overflow-hidden font-mono;
 
-    h2 {
-      @apply font-bold text-sm text-center w-full;
-    }
+    /* شريط العنوان */
+    #window-header {
+      @apply flex items-center justify-between bg-[#2C2C2C] px-4 py-2;
 
-    .techstack {
-      @apply text-sm font-roboto p-5;
+      /* أزرار التحكم */
+      .window-controls {
+        @apply flex gap-2;
 
-      .label {
-        @apply flex items-center ms-10 mt-7;
-      }
-
-      .content {
-        @apply py-5 my-5 border-y border-dashed space-y-1;
-
-        li {
-          .check {
-            @apply text-[#00A154] w-5;
-          }
-
-          h3 {
-            @apply font-semibold text-[#00A154] w-32 ms-5;
-          }
-
-          ul {
-            @apply flex items-center gap-3;
-          }
+        .close {
+          @apply w-3 h-3 rounded-full bg-[#FF605C] cursor-pointer;
+        }
+        .minimize {
+          @apply w-3 h-3 rounded-full bg-[#FFBD44] cursor-pointer;
+        }
+        .maximize {
+          @apply w-3 h-3 rounded-full bg-[#00CA4E] cursor-pointer;
         }
       }
 
-      .footnote {
+      h2 {
+        @apply font-bold text-sm text-center w-full text-white;
+      }
+    }
+
+    /* محتوى التيرمنال */
+    .techstack {
+      @apply text-sm p-4 space-y-3;
+
+      .label {
+        @apply flex items-center gap-4 text-gray-400 uppercase text-xs;
+        p:first-child {
+          @apply w-28;
+        }
+      }
+
+      .content {
+        @apply py-3 border-t border-b border-gray-600 space-y-2 max-h-60 overflow-y-auto;
+
+        li {
+          @apply flex flex-col gap-1;
+
+          .check {
+            @apply text-[#00A154] w-4;
+          }
+
+          h3 {
+            @apply font-semibold text-[#00A154] w-28;
+          }
+
+          ul {
+            @apply flex flex-wrap items-center gap-2 ml-8;
+          }
+        }
+      }
+    }
+  }
+
+
+  .footnote {
         @apply text-[#00A154] space-y-1;
 
         p {
@@ -206,7 +235,7 @@ body {
         }
       }
     }
-  }
+
 
   #contact {
     @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
@@ -393,4 +422,3 @@ body {
       }
     }
   }
-}
